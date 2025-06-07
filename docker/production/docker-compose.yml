@@ -1,0 +1,10 @@
+networks:
+  nebulasilva_app:
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/production/Dockerfile
+    networks:
+      - nebulasilva_app
