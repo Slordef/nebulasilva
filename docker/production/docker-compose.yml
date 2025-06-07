@@ -6,7 +6,7 @@ services:
   app:
     container_name: nebulasilva_app
     build:
-      context: .
+      context: ../..
       dockerfile: docker/production/Dockerfile
     networks:
       - app
