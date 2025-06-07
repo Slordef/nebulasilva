@@ -1,0 +1,17 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  app:
+    runs-on: [self-hosted, production]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: |
+          docker compose -f docker/production/docker-compose.prod.yml build
+
+      - name: Run Docker Compose
+        run: |
+          docker compose -f docker/production/docker-compose.prod.yml up -d --remove-orphans
