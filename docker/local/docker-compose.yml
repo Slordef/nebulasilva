@@ -1,0 +1,18 @@
+volumes:
+  frontend_node_modules:
+  node_modules:
+
+networks:
+  nebulasilva_app:
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/local/frontend/Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - node_modules:/app/node_modules
+      - frontend_node_modules:/app/frontend/node_modules
+      - ./:/app
