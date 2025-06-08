@@ -26,6 +26,7 @@ jobs:
           if echo "$LOG" | grep -q "Exit [^0]"; then
               echo "One or more containers exited with a non-zero code:"
               echo "$LOG"
+              docker compose -f docker/production/docker-compose.yml logs --tail 100
               exit 1
           else
               echo "All containers are running or exited cleanly."
