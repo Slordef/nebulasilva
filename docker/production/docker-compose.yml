@@ -1,3 +1,5 @@
+name: nebulasilva_production
+
 networks:
   app:
     name: nebulasilva_app
