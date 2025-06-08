@@ -5,6 +5,7 @@ networks:
 services:
   app:
     container_name: nebulasilva_app
+    restart: always
     build:
       context: ../..
       dockerfile: docker/production/Dockerfile
