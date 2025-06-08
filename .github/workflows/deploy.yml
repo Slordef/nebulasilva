@@ -22,12 +22,17 @@ jobs:
 
       - name: Ensure container are running (no exit code)
         run: |
-          LOG=$(docker compose -f docker/production/docker-compose.yml logs | grep -i "Exit")
-          if echo "$LOG" | grep -q "Exit [^0]"; then
-              echo "One or more containers exited with a non-zero code:"
-              echo "$LOG"
-              docker compose -f docker/production/docker-compose.yml logs --tail 100
-              exit 1
+          OUTPUT=$(docker compose -f docker/production/docker-compose.yml ps)
+          echo "$OUTPUT"
+
+          if echo "$OUTPUT" | grep -E "Exit [^0]"; then
+            echo "❌ One or more containers exited with a non-zero code."
+            exit 1
           else
-              echo "All containers are running or exited cleanly."
+            echo "✅ All containers are running or exited cleanly."
           fi
+
+      - name: Notify deployment error
+        if: failure()
+        run: |
+          docker compose -f docker/production/docker-compose.yml logs --tail 100
