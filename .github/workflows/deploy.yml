@@ -15,3 +15,18 @@ jobs:
       - name: Run Docker Compose
         run: |
           docker compose -f docker/production/docker-compose.yml up -d --remove-orphans
+
+      - name: Wait 10sec
+        run: |
+          sleep 10
+
+      - name: Ensure container are running (no exit code)
+        run: |
+          LOG=$(docker compose -f docker/production/docker-compose.yml ps | grep -i "Exit")
+          if echo "$LOG" | grep -q "Exit [^0]"; then
+              echo "One or more containers exited with a non-zero code:"
+              echo "$LOG"
+              exit 1
+          else
+              echo "All containers are running or exited cleanly."
+          fi
