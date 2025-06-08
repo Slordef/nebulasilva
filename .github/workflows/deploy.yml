@@ -22,7 +22,7 @@ jobs:
 
       - name: Ensure container are running (no exit code)
         run: |
-          LOG=$(docker compose -f docker/production/docker-compose.yml ps | grep -i "Exit")
+          LOG=$(docker compose -f docker/production/docker-compose.yml logs | grep -i "Exit")
           if echo "$LOG" | grep -q "Exit [^0]"; then
               echo "One or more containers exited with a non-zero code:"
               echo "$LOG"
