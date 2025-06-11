@@ -1,8 +1,9 @@
-<script lang="ts">
-import Info from "./Info.svelte";
-import ContactUs from "./ContactUs.svelte";
+<script setup lang="ts">
+import Info from "./Info.vue";
+import ContactUs from "./ContactUs.vue";
 </script>
 
+<template>
 <main>
   <div class="logo">
     <img src="/logo.svg" alt="Logo" />
@@ -12,5 +13,4 @@ import ContactUs from "./ContactUs.svelte";
     <ContactUs />
   </div>
 </main>
-
-<style src="app.scss"></style>
+</template>
